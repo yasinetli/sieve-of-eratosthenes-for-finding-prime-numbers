@@ -4,23 +4,20 @@
 # This script finds prime numbers up to any number entered with the sieve of Eratosthenes algorithm.
 
 def eratosthenes():
+    number_list = []
     prime_list = []
-    not_prime_list = []
     range_input = int(input("What number do you want to find prime numbers up to? \n"))
     for i in range(2, range_input):
-        number_list = [i]
-        for num in number_list:
-            division_number = round(len(prime_list) / 2)
-            for item in range(0, division_number):
-                if num % prime_list[item] == 0:
-                    not_prime_list.append(i)
+        number_list.append(i)
 
-            if num not in not_prime_list:
-                prime_list.append(i)
-                npr_num = int(range_input / num)
-                for number in range(1, npr_num):
-                    if num * number in number_list:
-                        number_list.remove(num * number)
+    for num in number_list:
+        prime_list.append(num)
+        times_num = int(range_input / num)+1
+        for tn in range(2, times_num):
+            times = num * tn
+            if times in number_list:
+                number_list.remove(times)
+
     print(prime_list)
     print(len(prime_list))
 
